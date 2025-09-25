@@ -37,3 +37,24 @@ function calculateResult() {
     document.getElementById('display').value = result;
     alert(expression + ' = ' + result); 
 }
+
+function backspace() {
+    let display = document.getElementById('display');
+    display.value = display.value.slice(0, -1);
+}
+
+window.addEventListener('keydown', function(event) {
+    const key = event.key;
+
+    if (key >= '0' && key <= '9') {
+        displayNumber(key);
+    } else if (key == '+' || key == '-' || key == '*' || key == '/' || key == '(' || key == ')') {
+        displayNumber(key);
+    } else if (key == 'Enter' || key == '=') {
+        calculateResult();
+    } else if (key == 'Backspace') {
+        backspace();
+    } else {
+        return; 
+    }
+});
