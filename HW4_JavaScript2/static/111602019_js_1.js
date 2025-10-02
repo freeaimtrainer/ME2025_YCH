@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const inputElement = document.getElementById('input_1');
     const timerDisplay = document.getElementById('timerDisplay');
     const messageArea = document.getElementById('messageArea');
+    const logContainer = document.getElementById('logContainer');
 
     let randomNumber;
     let guessCount;
     let startTime;
     let timerInterval;
+    let gameRound = 1;
 
     startNewGame();
 
@@ -48,6 +50,12 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(timerInterval);
             const timeTaken = ((new Date().getTime() - startTime) / 1000).toFixed(2);
             alert(`猜中了！共猜了 ${guessCount} 次，花了 ${timeTaken} 秒。`);
+
+            const logEntry = document.createElement('p');
+            const completionTime = new Date().toLocaleTimeString();
+            logEntry.textContent = `${gameRound}. 猜了 ${guessCount} 次，耗時 ${timeTaken} 秒，${completionTime}`;
+            logContainer.appendChild(logEntry);
+            gameRound++;
 
             startNewGame();
         }
