@@ -1,60 +1,28 @@
-document.write('<font face="Arial" size="10"><b>計算機</b></font>');
-document.write('<h1></h1>');
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("tbody tr").forEach(row => {
+    const stock = parseInt(row.querySelector(".stock").textContent);
+    const price = parseInt(row.querySelector(".price").textContent);
+    const qtyInput = row.querySelector(".qty");
+    const subtotalEl = row.querySelector(".subtotal");
 
-document.write('<input type="text" id="display">');
-
-document.write('<table>');
-for (let i = 0; i <= 9; i++) {
-    document.write('<td><button onclick="displayNumber(\'' + i + '\')">' + i + '</button></td>');
-    if (i % 3 == 2) {
-        document.write('<tr></tr>');
+    function updateSubtotal() {
+      let qty = parseInt(qtyInput.value) || 1;
+      if (qty < 1) qty = 1;
+      if (qty > stock) qty = stock;
+      qtyInput.value = qty;
+      subtotalEl.textContent = qty * price;
     }
-}
-document.write('<td colspan="2"><button onclick="clearNumber()">Clear</button></td>');
-document.write('</table>');
 
-document.write('<table>');
-document.write('<td><button onclick="displayNumber(\'+\')">+</button></td>');
-document.write('<td><button onclick="displayNumber(\'-\')">-</button></td>');
-document.write('<td><button onclick="displayNumber(\'*\')">x</button></td>');
-document.write('<td><button onclick="displayNumber(\'/\')">/</button></td>');
-document.write('<td><button onclick="displayNumber(\'(\')">(</button></td>');
-document.write('<td><button onclick="displayNumber(\')\')">)</button></td>');
-document.write('<td><button onclick="calculateResult()">=</button></td>');
-document.write('</table>');
+    row.querySelector(".plus").addEventListener("click", () => {
+      if (parseInt(qtyInput.value) < stock) qtyInput.value++;
+      updateSubtotal();
+    });
 
-function displayNumber(value) {
-    document.getElementById('display').value += value;
-}
+    row.querySelector(".minus").addEventListener("click", () => {
+      if (parseInt(qtyInput.value) > 1) qtyInput.value--;
+      updateSubtotal();
+    });
 
-function clearNumber() {
-    document.getElementById('display').value = '';
-}
-
-function calculateResult() {
-    let expression = document.getElementById('display').value;
-    let result = eval(expression);
-    document.getElementById('display').value = result;
-    alert(expression + ' = ' + result); 
-}
-
-function backspace() {
-    let display = document.getElementById('display');
-    display.value = display.value.slice(0, -1);
-}
-
-window.addEventListener('keydown', function(event) {
-    const key = event.key;
-
-    if (key >= '0' && key <= '9') {
-        displayNumber(key);
-    } else if (key == '+' || key == '-' || key == '*' || key == '/' || key == '(' || key == ')') {
-        displayNumber(key);
-    } else if (key == 'Enter' || key == '=') {
-        calculateResult();
-    } else if (key == 'Backspace') {
-        backspace();
-    } else {
-        return; 
-    }
+    qtyInput.addEventListener("blur", updateSubtotal);
+  });
 });
