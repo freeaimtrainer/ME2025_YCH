@@ -10,6 +10,7 @@
         <table border="2">
             <thead>
                 <tr>
+                    <th><input type="checkbox" id="checkAll"></th>
                     <th>商品名稱</th>
                     <th>商品庫存</th>
                     <th>單價</th>
@@ -20,6 +21,7 @@
             
             <tbody>
                 <tr>
+                    <td><input type="checkbox" class="item-check"></td>
                     <td>
                         <img src="https://img.pchome.com.tw/cs/items/DSABF1A900I1PHX/000001_1730795166.jpg" width="200" valign="middle">
                         BenQ 護眼螢幕
@@ -35,6 +37,7 @@
                 </tr>
                 
                 <tr>
+                    <td><input type="checkbox" class="item-check"></td>
                     <td>
                         <img src="https://img.pchome.com.tw/cs/items/DAAN3PA900H1D9D/000001_1757384061.jpg" width="200" valign="middle">
                         3M 博視燈
@@ -50,6 +53,7 @@
                 </tr>
 
                 <tr>
+                    <td><input type="checkbox" class="item-check"></td>
                     <td>
                         <img src="https://img.pchome.com.tw/cs/items/DGCS3LA900HPWN8/000001_1723085760.jpg" width="200" valign="middle">
                         DJI MINI 4 Pro
@@ -64,6 +68,13 @@
                     <td class="subtotal" align="center">6988</td>
                 </tr>
             </tbody>
+            
+            <tfoot>
+                <tr>
+                    <td colspan="5" align="center">Total</td>
+                    <td id="total" align="center">0</td>
+                </tr>
+            </tfoot>
         </table>
 
     </body>
